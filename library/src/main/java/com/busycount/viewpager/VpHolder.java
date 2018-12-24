@@ -15,14 +15,17 @@ public abstract class VpHolder<T> {
 
     public VpHolder(LayoutInflater inflater, ViewGroup container) {
         itemView = inflater.inflate(setLayoutId(), container, false);
+        initView(itemView);
     }
 
-    public View getView() {
+    protected View getView() {
         return itemView;
     }
 
     @LayoutRes
-    public abstract int setLayoutId();
+    protected abstract int setLayoutId();
 
-    public abstract void onBindData(T data);
+    protected abstract void initView(View itemView);
+
+    protected abstract void onBindData(T data);
 }

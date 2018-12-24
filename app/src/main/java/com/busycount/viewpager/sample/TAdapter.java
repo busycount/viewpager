@@ -3,6 +3,7 @@ package com.busycount.viewpager.sample;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -26,16 +27,20 @@ public class TAdapter extends VpAdapter<String> {
 
         public THolder(LayoutInflater inflater, ViewGroup container) {
             super(inflater, container);
-            textView = getView().findViewById(R.id.textView);
         }
 
         @Override
-        public int setLayoutId() {
+        protected int setLayoutId() {
             return R.layout.item;
         }
 
         @Override
-        public void onBindData(String data) {
+        protected void initView(View itemView) {
+            textView = getView().findViewById(R.id.textView);
+        }
+
+        @Override
+        protected void onBindData(String data) {
             textView.setText(data);
             textView.setBackgroundColor(Color.CYAN);
         }
