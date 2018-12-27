@@ -1,8 +1,10 @@
 package com.busycount.viewpager;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,6 @@ public abstract class VpAdapter<T> extends PagerAdapter {
 
     private List<T> dataList = new ArrayList<>();
     private SparseArray<VpHolder<T>> holderArray = new SparseArray<>();
-    private int cacheSize = 1;
     private LayoutInflater inflater;
 
     @Override
@@ -61,7 +62,7 @@ public abstract class VpAdapter<T> extends PagerAdapter {
                 inflater = LayoutInflater.from(container.getContext());
             }
             holder = onCreateHolder(inflater, container);
-            holderArray.put(position % cacheSize, holder);
+            holderArray.put(position, holder);
         }
         holder.onBindData(dataList.get(position));
         View view = holder.getView();
@@ -70,13 +71,12 @@ public abstract class VpAdapter<T> extends PagerAdapter {
     }
 
     private VpHolder<T> getHolder(int position) {
-        return holderArray.get(position % cacheSize);
+        return holderArray.get(position);
     }
 
     protected abstract VpHolder<T> onCreateHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup container);
 
     public final void attachViewPager(ViewPager viewPager) {
-        this.cacheSize = 2 * (viewPager.getOffscreenPageLimit() + 1);
         viewPager.setAdapter(this);
     }
 
@@ -86,5 +86,6 @@ public abstract class VpAdapter<T> extends PagerAdapter {
             dataList.addAll(newData);
         }
         notifyDataSetChanged();
+
     }
 }
