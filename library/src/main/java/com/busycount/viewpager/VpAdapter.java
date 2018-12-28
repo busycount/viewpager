@@ -78,6 +78,15 @@ public abstract class VpAdapter<T> extends PagerAdapter {
 
     public final void attachViewPager(ViewPager viewPager) {
         viewPager.setAdapter(this);
+//        viewPager.getHandler()
+    }
+
+    Cycler cycler;
+
+    public final void attachViewPager2(ViewPager viewPager) {
+        viewPager.setAdapter(this);
+        cycler = new Cycler(viewPager);
+        cycler.start();
     }
 
     public final void setData(List<T> newData) {
@@ -86,6 +95,9 @@ public abstract class VpAdapter<T> extends PagerAdapter {
             dataList.addAll(newData);
         }
         notifyDataSetChanged();
-
+        if (cycler != null) {
+            cycler.start();
+        }
     }
+
 }
