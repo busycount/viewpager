@@ -1,4 +1,4 @@
-package com.busycount.viewpager.sample;
+package com.busycount.viewpager.sample.adapter;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.busycount.viewpager.VpAdapter;
 import com.busycount.viewpager.VpHolder;
+import com.busycount.viewpager.sample.R;
 
 /**
  * TAdapter

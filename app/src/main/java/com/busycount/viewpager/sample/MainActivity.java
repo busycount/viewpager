@@ -5,10 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.busycount.viewpager.banner.Banner;
+import com.busycount.viewpager.sample.R;
+import com.busycount.viewpager.sample.adapter.TAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Default
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -26,6 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClick(View view) {
+        int id = view.getId();
+        switch (id) {
+            case R.id.button1:
+                changeData();
+                break;
+            case R.id.button2:
+                Main2Activity.start(this);
+                break;
+            case R.id.button3:
+                BannerActivity.start(this);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private void changeData() {
         List<String> list = new ArrayList<>();
         Random random = new Random();
         int m = random.nextInt(100);
@@ -34,5 +59,4 @@ public class MainActivity extends AppCompatActivity {
         }
         tAdapter.setData(list);
     }
-
 }

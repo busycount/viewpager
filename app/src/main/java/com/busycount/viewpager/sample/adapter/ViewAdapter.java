@@ -1,4 +1,4 @@
-package com.busycount.viewpager.sample;
+package com.busycount.viewpager.sample.adapter;
 
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.TextView;
+
+import com.busycount.viewpager.sample.R;
 
 import java.util.ArrayList;
 import java.util.List;
