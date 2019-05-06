@@ -14,34 +14,34 @@ import java.util.List;
  * 2019/4/20 | Count.C | Created
  */
 public abstract class BaseBannerAdapter<T> extends FragmentStatePagerAdapter {
-    private List<T> list;
-    private List<T> list_wrap = new ArrayList<>();
+    private List<T> data;
+    private List<T> wrapData = new ArrayList<>();
 
     public BaseBannerAdapter(FragmentManager fm, @NonNull List<T> list) {
         super(fm);
-        this.list = list;
+        this.data = list;
         if (list.size() > 1) {
-            list_wrap.add(list.get(list.size() - 1));
-            list_wrap.addAll(list);
-            list_wrap.add(list.get(0));
+            wrapData.add(list.get(list.size() - 1));
+            wrapData.addAll(list);
+            wrapData.add(list.get(0));
         } else {
-            list_wrap.addAll(list);
+            wrapData.addAll(list);
         }
     }
 
     @Override
     public int getCount() {
-        return list_wrap.size();
+        return wrapData.size();
     }
 
     @Override
-    public Fragment getItem(int i) {
-        return getItem(i, list_wrap.get(i));
+    public Fragment getItem(int position) {
+        return getItem(position, wrapData.get(position));
     }
 
-    public abstract Fragment getItem(int i, T data);
+    public abstract Fragment getItem(int position, T data);
 
     public List<T> getData() {
-        return list;
+        return data;
     }
 }

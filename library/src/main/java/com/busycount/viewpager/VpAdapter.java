@@ -76,9 +76,6 @@ public abstract class VpAdapter<T> extends PagerAdapter {
 
     protected abstract VpHolder<T> onCreateHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup container);
 
-    public final void attachViewPager(ViewPager viewPager) {
-        viewPager.setAdapter(this);
-    }
 
     public final void setData(List<T> newData) {
         dataList.clear();
@@ -86,6 +83,5 @@ public abstract class VpAdapter<T> extends PagerAdapter {
             dataList.addAll(newData);
         }
         notifyDataSetChanged();
-
     }
 }

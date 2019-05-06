@@ -27,12 +27,7 @@ public class TAdapter extends VpAdapter<String> {
         TextView textView;
 
         public THolder(LayoutInflater inflater, ViewGroup container) {
-            super(inflater, container);
-        }
-
-        @Override
-        protected int setLayoutId() {
-            return R.layout.item;
+            super(inflater, container, R.layout.item);
         }
 
         @Override
@@ -45,5 +40,6 @@ public class TAdapter extends VpAdapter<String> {
             textView.setText(data);
             textView.setBackgroundColor(Color.CYAN);
         }
+
     }
 }

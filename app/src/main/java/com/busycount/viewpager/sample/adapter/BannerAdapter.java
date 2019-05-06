@@ -21,7 +21,7 @@ public class BannerAdapter extends BaseBannerAdapter<String> {
     }
 
     @Override
-    public Fragment getItem(int i, String data) {
+    public Fragment getItem(int position, String data) {
         return BannerFragment.newInstance(data);
     }
 }

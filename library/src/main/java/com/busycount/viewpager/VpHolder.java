@@ -11,19 +11,21 @@ import android.view.ViewGroup;
  * 2018/12/18 | Count.C | Created
  */
 public abstract class VpHolder<T> {
-    private View itemView;
 
-    public VpHolder(LayoutInflater inflater, ViewGroup container) {
-        itemView = inflater.inflate(setLayoutId(), container, false);
+    private final View itemView;
+
+    public VpHolder(View itemView) {
+        this.itemView = itemView;
         initView(itemView);
+    }
+
+    public VpHolder(LayoutInflater inflater, ViewGroup container, int layoutId) {
+        this(inflater.inflate(layoutId, container, false));
     }
 
     protected View getView() {
         return itemView;
     }
-
-    @LayoutRes
-    protected abstract int setLayoutId();
 
     protected abstract void initView(View itemView);
 

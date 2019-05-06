@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tAdapter = new TAdapter();
         tAdapter.setData(null);
-        tAdapter.attachViewPager(viewPager);
+        viewPager.setAdapter(tAdapter);
     }
 
 

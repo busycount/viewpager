@@ -36,7 +36,7 @@ public class Main2Activity extends AppCompatActivity {
         viewPager.setPageTransformer(true, new PageScaleTransformer());
         tAdapter = new TAdapter();
         tAdapter.setData(null);
-        tAdapter.attachViewPager(viewPager);
+        viewPager.setAdapter(tAdapter);
         changeData();
     }
 
