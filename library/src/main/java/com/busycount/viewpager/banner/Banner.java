@@ -6,9 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Scroller;
 
 import com.busycount.viewpager.R;
+
+import java.lang.reflect.Field;
 
 /**
  * Banner
@@ -31,17 +35,20 @@ public class Banner extends ViewPager {
     private OnPageSelectListener onPageSelectListener;
     private boolean isStart;
     private long duration;
-
+    private boolean isVertical;
 
     private void init(@Nullable AttributeSet attrs) {
 
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.Banner);
         duration = ta.getInteger(R.styleable.Banner_duration, 3000);
+        isVertical = ta.getBoolean(R.styleable.Banner_isVertical, false);
         ta.recycle();
         if (duration < 1500) {
             duration = 1500;
         }
-
+        if (isVertical) {
+            setPageTransformer(false, new VerticalTransformer());
+        }
 
         addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -60,6 +67,24 @@ public class Banner extends ViewPager {
 
             }
         });
+        setScroller();
+    }
+
+    private void setScroller() {
+        try {
+            ViewPagerScroller scroller = new ViewPagerScroller(getContext());
+            Class superClass = getClass().getSuperclass();
+            if (superClass == null) {
+                return;
+            }
+            Field fieldScroller = superClass.getDeclaredField("mScroller");
+            fieldScroller.setAccessible(true);
+            fieldScroller.set(this, scroller);
+        } catch (NoSuchFieldException e) {
+            Log.d("Banner", "反射出错 " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            Log.d("Banner", "反射出错 " + e.getMessage());
+        }
     }
 
     private void onBannerSelect(int position) {
@@ -157,6 +182,23 @@ public class Banner extends ViewPager {
         } else {
             stopFlipping();
         }
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        return super.onTouchEvent(transformEvent(ev));
+    }
+
+    private MotionEvent transformEvent(MotionEvent ev) {
+        if (!isVertical) {
+            return ev;
+        }
+        MotionEvent event = MotionEvent.obtain(ev);
+        int width = getWidth();
+        int height = getHeight();
+        event.setLocation(event.getY() / height * width, event.getX() / width * height);
+        return event;
     }
 
 

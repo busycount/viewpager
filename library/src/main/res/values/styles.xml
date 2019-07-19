@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="Banner">
         <attr name="duration" format="integer" />
+        <attr name="isVertical" format="boolean" />
     </declare-styleable>
 </resources>

@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button3:
                 BannerActivity.start(this);
                 break;
+            case R.id.button4:
+                VerticalBannerActivity.start(this);
+                break;
             default:
                 break;
         }

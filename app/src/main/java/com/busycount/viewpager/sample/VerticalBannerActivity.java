@@ -7,29 +7,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.busycount.viewpager.banner.Banner;
-import com.busycount.viewpager.sample.adapter.BannerAdapter;
-import com.busycount.viewpager.sample.widget.PageScaleTransformer;
+import com.busycount.viewpager.sample.adapter.VerticalBannerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Banner
+ * Vertical Banner
  */
-public class BannerActivity extends AppCompatActivity {
+public class VerticalBannerActivity extends AppCompatActivity {
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, BannerActivity.class);
+        Intent starter = new Intent(context, VerticalBannerActivity.class);
         context.startActivity(starter);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_banner);
+        setContentView(R.layout.activity_banner_vertical);
         Banner banner = findViewById(R.id.viewPager);
-        banner.setPageTransformer(true, new PageScaleTransformer());
-        BannerAdapter bannerAdapter = new BannerAdapter(getSupportFragmentManager(), getData());
+        VerticalBannerAdapter bannerAdapter = new VerticalBannerAdapter(getSupportFragmentManager(), getData());
         banner.setOnPageSelectListener(new Banner.OnPageSelectListener() {
             @Override
             public void onPageSelected(int page) {
